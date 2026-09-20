@@ -1,0 +1,15 @@
+{
+  "name": "Pest Control Innovation",
+  "short_name": "PCI Pest Control",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090b10",
+  "theme_color": "#ffd400",
+  "icons": [
+    {
+      "src": "/assets/images/pci-logo.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ]
+}
