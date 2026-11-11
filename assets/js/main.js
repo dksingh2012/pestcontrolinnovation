@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded",()=>{
    const href=link.getAttribute("href")||"";
    if(/^tel:/i.test(href)){
      track("phone_click",{contact_method:"phone",link_location:link.closest("header")?"header":link.closest("footer")?"footer":link.closest(".contact-card")?"contact_card":"website"});
-   }else if(/wa\.me|api\.whatsapp\.com/i.test(href)){
+   }else if(/(?:wa\.me\/917906316517(?:[/?]|$)|api\.whatsapp\.com\/send\?phone=917906316517(?:&|$))/i.test(href)){
      track("whatsapp_click",{contact_method:"whatsapp",link_location:link.classList.contains("whatsapp-float")?"floating_button":link.closest("header")?"header":link.closest("footer")?"footer":"website"});
    }
  });
