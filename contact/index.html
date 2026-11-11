@@ -37,11 +37,11 @@ document.addEventListener("DOMContentLoaded",()=>{
     const emailData=new FormData(form);
     try{
       const results=await Promise.allSettled([
-        fetch("https://intake.pestcontrolinnovation.in/",{method:"POST",body:crmData}),
-        fetch("https://api.web3forms.com/submit",{method:"POST",body:emailData,headers:{Accept:"application/json"}})
+        fetch("https://intake.pestcontrolinnovation.in/",{method:"POST",body:crmData}).then(async response=>({httpOk:response.ok,status:response.status,data:await response.json().catch(()=>({}))})),
+        fetch("https://api.web3forms.com/submit",{method:"POST",body:emailData,headers:{Accept:"application/json"}}).then(async response=>({httpOk:response.ok,status:response.status,data:await response.json().catch(()=>({}))}))
       ]);
-      const crmOk=results[0].status==="fulfilled" && results[0].value.ok;
-      const emailOk=results[1].status==="fulfilled" && results[1].value.ok;
+      const crmOk=results[0].status==="fulfilled" && results[0].value.httpOk && results[0].value.data && results[0].value.data.ok===true;
+      const emailOk=results[1].status==="fulfilled" && results[1].value.httpOk && results[1].value.data && results[1].value.data.success===true;
       if(crmOk){
         if(success){success.hidden=false;success.textContent=emailOk?"Thank you. Your enquiry has been saved. Our team will contact you shortly.":"Your enquiry has been saved. Our team will contact you shortly.";}
         form.reset();
