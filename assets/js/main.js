@@ -26,12 +26,10 @@ document.addEventListener("DOMContentLoaded",()=>{
  const form=document.querySelector("#enquiry-form");
  if(form){
    form.addEventListener("submit",()=>{
-     // Allow a new genuine submission to be counted after a prior confirmation page.
+     // Track the attempt without changing the button: the contact page owns
+     // async submission state and restores its own button label on completion.
      try{sessionStorage.removeItem("oai_lead_created_once");}catch(e){}
-     // This is an attempt only; a successful lead is recorded on the FormSubmit return URL.
      track("lead_form_submit_attempt",{form_name:"website_enquiry"});
-     const btn=form.querySelector("button[type=submit]");
-     if(btn){btn.disabled=true;btn.textContent="Sending enquiry…";}
    });
  }
  // FormSubmit returns here only after its configured submission flow; do not include form data.
